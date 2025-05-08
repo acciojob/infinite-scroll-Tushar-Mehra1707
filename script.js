@@ -1,25 +1,23 @@
-//your code here!
-// Get reference to the list container
-const listContainer = document.getElementById("infinite-list");
+const list = document.getElementById('list');
 let itemCount = 0;
-function addListItems(n) {
-  for (let i = 0; i < n; i++) {
-    const li = document.createElement("li");
+
+// Function to add items to the list
+function addItems(count = 10) {
+  for (let i = 0; i < count; i++) {
+    const li = document.createElement('li');
     li.textContent = `Item ${++itemCount}`;
-    listContainer.appendChild(li);
+    list.appendChild(li);
   }
 }
 
-// Add initial 10 list items
-addListItems(10);
-window.addEventListener("scroll", () => {
-  const scrollTop = document.documentElement.scrollTop;
-  const windowHeight = window.innerHeight;
-  const fullHeight = document.documentElement.scrollHeight;
+// Add initial 10 items
+addItems(10);
 
-  if (scrollTop + windowHeight >= fullHeight - 5) {
-    addListItems(2); // Add 2 more items when bottom is reached
+// Infinite scroll logic
+const container = document.querySelector('.container');
+
+container.addEventListener('scroll', () => {
+  if (container.scrollTop + container.clientHeight >= container.scrollHeight - 5) {
+    addItems(2); // Add 2 more items when near the bottom
   }
 });
-
-
